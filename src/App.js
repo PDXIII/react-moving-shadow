@@ -57,13 +57,6 @@ class App extends Component {
         <div onMouseMove={this.listenMovement} className="playground">
           <div className="figurine" />
         </div>
-        <style jsx>{`
-          .figurine {
-            background-color: blue;
-            box-shadow: ${this.state.coordX * -0.5}px
-              ${this.state.coordY * -0.5}px 2px 10px rgba(0, 0, 0, .24);
-          }
-        `}</style>
       </div>
     );
   }
