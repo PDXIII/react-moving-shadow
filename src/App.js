@@ -16,6 +16,7 @@ class App extends Component {
 
     this.listenMovement = this.listenMovement.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
+    this.getOffset = this.getOffset.bind(this);
   }
   componentDidMount() {
     window.addEventListener("resize", this.updateDimensions);
@@ -42,7 +43,15 @@ class App extends Component {
     });
   }
 
+  getOffset(coord) {
+    return coord * -0.5;
+  }
   render() {
+    const offSetX = this.getOffset(this.state.coordX);
+    const offSetY = this.getOffset(this.state.coordY);
+    const movingShadow = {
+      boxShadow: `${offSetX}px ${offSetY}px 2px 10px rgba(0, 0, 0, .24)`
+    };
     return (
       <div className="app">
         <h1>Moving Shadow</h1>
@@ -55,15 +64,8 @@ class App extends Component {
           {this.state.coordY};
         </div>
         <div onMouseMove={this.listenMovement} className="playground">
-          <div className="figurine" />
+          <div className="figurine" style={movingShadow} />
         </div>
-        <style jsx>{`
-          .figurine {
-            background-color: blue;
-            box-shadow: ${this.state.coordX * -0.5}px
-              ${this.state.coordY * -0.5}px 2px 10px rgba(0, 0, 0, .24);
-          }
-        `}</style>
       </div>
     );
   }
